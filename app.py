@@ -39,10 +39,14 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    if message_text == "help":
-                        send_message(sender_id, "Visit our website for more information.")
+                    if "help" in message_text:
+                        send_message(sender_id, "We are happy to help! Type 'rights', 'travel ban', or 'ICE' for specific information.")
+                    elif "rights" in message_text:
+                        send_message(sender_id, "Everyone has certain basic rights, no matter who is president. Visit https://www.miracoalition.org/know-your-rights for specific information.")
+                    elif "travel" in message_text || "ban" in message_text:
+                        send_message(sender_id, "Visit https://www.miracoalition.org/travel-ban for most up-to-date information.")
                     else:
-                        send_message(sender_id, "got it, thanks!")
+                        send_message(sender_id, "I don't know how to answer that question. Please visit https://www.miracoalition.org/resources for more information.")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
